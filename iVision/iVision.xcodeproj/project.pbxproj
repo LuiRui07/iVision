@@ -15,12 +15,12 @@
 		7B713E38293E15E300909990 /* iVisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0C293E15E200909990 /* iVisionApp.swift */; };
 		7B713E39293E15E300909990 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0D293E15E200909990 /* ContentView.swift */; };
 		7B713E3A293E15E300909990 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0D293E15E200909990 /* ContentView.swift */; };
-		7B713E3B293E15E300909990 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0E293E15E200909990 /* Persistence.swift */; };
-		7B713E3C293E15E300909990 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0E293E15E200909990 /* Persistence.swift */; };
 		7B713E3D293E15E300909990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B713E0F293E15E300909990 /* Assets.xcassets */; };
 		7B713E3E293E15E300909990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B713E0F293E15E300909990 /* Assets.xcassets */; };
 		7B713E4F293E16BD00909990 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E4D293E16BD00909990 /* Model.xcdatamodeld */; };
 		7B713E50293E16BD00909990 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E4D293E16BD00909990 /* Model.xcdatamodeld */; };
+		7B75DA60293F808A00325034 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B75DA5F293F808A00325034 /* DataController.swift */; };
+		7B75DA61293F808A00325034 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B75DA5F293F808A00325034 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,6 @@
 /* Begin PBXFileReference section */
 		7B713E0C293E15E200909990 /* iVisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iVisionApp.swift; sourceTree = "<group>"; };
 		7B713E0D293E15E200909990 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7B713E0E293E15E200909990 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7B713E0F293E15E300909990 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B713E14293E15E300909990 /* iVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B713E1A293E15E300909990 /* iVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +54,7 @@
 		7B713E31293E15E300909990 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		7B713E33293E15E300909990 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		7B713E4E293E16BD00909990 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		7B75DA5F293F808A00325034 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +105,7 @@
 			children = (
 				7B713E0C293E15E200909990 /* iVisionApp.swift */,
 				7B713E0D293E15E200909990 /* ContentView.swift */,
-				7B713E0E293E15E200909990 /* Persistence.swift */,
+				7B75DA5F293F808A00325034 /* DataController.swift */,
 				7B713E4D293E16BD00909990 /* Model.xcdatamodeld */,
 				7B713E0F293E15E300909990 /* Assets.xcassets */,
 			);
@@ -307,7 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B713E3B293E15E300909990 /* Persistence.swift in Sources */,
+				7B75DA60293F808A00325034 /* DataController.swift in Sources */,
 				7B713E4F293E16BD00909990 /* Model.xcdatamodeld in Sources */,
 				7B713E37293E15E300909990 /* iVisionApp.swift in Sources */,
 				7B713E39293E15E300909990 /* ContentView.swift in Sources */,
@@ -318,7 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B713E3C293E15E300909990 /* Persistence.swift in Sources */,
+				7B75DA61293F808A00325034 /* DataController.swift in Sources */,
 				7B713E50293E16BD00909990 /* Model.xcdatamodeld in Sources */,
 				7B713E38293E15E300909990 /* iVisionApp.swift in Sources */,
 				7B713E3A293E15E300909990 /* ContentView.swift in Sources */,
