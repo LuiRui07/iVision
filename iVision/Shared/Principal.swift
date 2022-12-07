@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct Principal: View  {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
     @State private var Tnif: String = ""
@@ -22,15 +22,21 @@ struct ContentView: View {
             .padding()
             .font(.title)
         //Tabla
-        VStack {
-            List(clients) { client in
+       VStack {
+           List(clients) { client in
+               HStack{
                 Text(client.nif ?? "Unknown")
+                       .padding()
                 Text(client.nombre ?? "Unknown")
+                       .padding()
                 Text(client.apellidos ?? "Unknown")
+                       .padding()
                 Text(String(client.edad))
-        }
+                       .padding()
+               }
+            }
     }
-        .shadow(radius: 100)
+       .shadow(color: .black, radius:100)
         
         VStack{
         HStack{
@@ -60,15 +66,14 @@ struct ContentView: View {
             TextField("", text: $TEdad)
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
-    
-            Button("Revisiones"){
-
-            }
+            Button("Revisiones", action: buttonAction)
             
         }
         }
+        .frame(width: 1000)
         .multilineTextAlignment(.leading)
-
+        .padding()
+        //COMO COÑO SE COLOCA TODO PEGADO A LA IZQUIERDA COÑO
 
         //Botones abajo
         HStack{
@@ -91,19 +96,22 @@ struct ContentView: View {
             .fixedSize()
             
             Button("Borrar", role: .destructive){
-
+            
             }
             .padding(10)
             .fixedSize()
             
             Button("Limpiar"){
-
+                Tnif = ""
+                TNombre = ""
+                TApellidos = ""
+                TEdad = ""
             }
             .padding(10)
             .fixedSize()
             
             Button("Salir"){
-
+                exit(0)
             }
             .padding(10)
             .fixedSize()
@@ -113,17 +121,23 @@ struct ContentView: View {
     }
         
 }
-
+    
+    func buttonAction(){
+      print("Boton pulsado")
+    }
+    
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView()
+            Principal()
                 .preferredColorScheme(.dark)
                 .padding(0.0)
                 .environment(\.sizeCategory, .large)
             .previewLayout(.sizeThatFits)
-            ContentView()
-                .preferredColorScheme(.dark)
+            Principal()
+                .environment(\.sizeCategory, .large)
+            Principal()
+                .environment(\.sizeCategory, .large)
         }
         }
     }

@@ -6,14 +6,13 @@
 //
 
 import SwiftUI
-
 @main
 struct iVisionApp: App {
     @StateObject private var dataController = DataController()
 
     var body: some Scene {
         WindowGroup {
-           ContentView()
+           Principal()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
