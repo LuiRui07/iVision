@@ -16,7 +16,6 @@ struct Principal: View  {
     @State private var TApellidos: String = ""
     @State private var TEdad: String = ""
     
-    
     var body: some View {
         Text("Revisión Ocular")
             .padding()
@@ -66,7 +65,9 @@ struct Principal: View  {
             TextField("", text: $TEdad)
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
-            Button("Revisiones", action: buttonAction)
+            Button("Revisiones"){
+            // NOSE COMO CAMBIAR DE VENTANA
+            }
             
         }
         }
@@ -118,13 +119,10 @@ struct Principal: View  {
 
             
             
-    }
+            }
         
-}
-    
-    func buttonAction(){
-      print("Boton pulsado")
-    }
+        }
+
     
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

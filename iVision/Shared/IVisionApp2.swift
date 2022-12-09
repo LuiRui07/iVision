@@ -1,21 +1,27 @@
 //
+//  IVisionApp2.swift
+//  iVision
+//
+//  Created by Luis Ruiz Nuñez on 9/12/22.
+//
+
+import Foundation
+//
 //  iVisionApp.swift
 //  Shared
 //
 //  Created by Luis Ruiz Nuñez on 5/12/22.
 //
- 
+
 import SwiftUI
 
 @main
-struct iVisionApp: App {
+struct iVisionApp2: App {
     @StateObject private var dataController = DataController()
-    private var c = false
 
     var body: some Scene {
         WindowGroup {
-           Principal()
-           //Revisiones()
+           Revisiones()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }

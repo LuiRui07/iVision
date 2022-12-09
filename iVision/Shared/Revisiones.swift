@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
-    
+
 struct Revisiones: View{
     @Environment(\.managedObjectContext) var moc
     @State public var Tnif: String = "77227286W"
@@ -16,11 +16,22 @@ struct Revisiones: View{
     @State public var TApellidos: String = "Ruiz"
     @State public var TEdad: String = "10"
     @State public var currentDate: Date = Date()
-    @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
-    @FetchRequest(sortDescriptors: []) var dato: FetchedResults<TEye
-    >
     
-    var body: some View{
+    @State public var Od_esfera: String = ""
+    @State public var Od_cilindro : String = ""
+    @State public var Od_adicion : String = ""
+    @State public var Od_agudeza : String = ""
+    
+    @State public var Oi_esfera : String = ""
+    @State public var Oi_cilindro : String = ""
+    @State public var Oi_adicion : String = ""
+    @State public var Oi_agudeza : String = ""
+    
+    
+    @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
+    @FetchRequest(sortDescriptors: []) var datos: FetchedResults<TEye>
+    
+    var body: some View {
         VStack{
             let Todo =  Tnif + ";" + TNombre + ";" + TApellidos + ";" + TEdad
             Text(Todo)
@@ -44,28 +55,29 @@ struct Revisiones: View{
             }
     }
        .shadow(color: .black, radius:100)
-            
+    
+        //Cuadros de Texto
             VStack{
             HStack{
                 Text("OD_ESFERA")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Od_esfera)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
                 
                 Text("OI_ESFERA")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Oi_esfera)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
             }
             
             HStack{
                 Text("OD_CILINDRO")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Od_cilindro)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
                 
                 Text("OI_CILINDRO")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Oi_cilindro)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
             }
@@ -73,24 +85,24 @@ struct Revisiones: View{
             
             HStack{
                 Text("OD_ADICION")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Od_adicion)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
                 
                 Text("OI_ADICION")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Oi_adicion)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
             }
             
             HStack{
                 Text("OD_AGUDEZA")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Od_agudeza)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
                 
                 Text("OI_AGUDEZA")
-                TextField("11111111A", text: $Tnif)
+                TextField(" ", text: $Oi_agudeza)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
                     
