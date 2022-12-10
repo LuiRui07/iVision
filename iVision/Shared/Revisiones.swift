@@ -32,6 +32,7 @@ struct Revisiones: View{
     @FetchRequest(sortDescriptors: []) var datos: FetchedResults<TEye>
     
     var body: some View {
+        //Titulo
         VStack{
             let Todo =  Tnif + ";" + TNombre + ";" + TApellidos + ";" + TEdad
             Text(Todo)
@@ -68,6 +69,7 @@ struct Revisiones: View{
                 TextField(" ", text: $Oi_esfera)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
+                    
             }
             
             HStack{
@@ -113,7 +115,8 @@ struct Revisiones: View{
             .frame(width: 1000)
             .multilineTextAlignment(.leading)
             .padding()
-            
+        HStack{
+        //Calendario mas bugeao que mi abuela
             VStack{
             DatePicker("", selection: $currentDate)
             Text(currentDate, style: .date)
@@ -122,8 +125,9 @@ struct Revisiones: View{
                 .padding(.bottom, 200)
             
             }
-            
-            
+            .frame(width: 400)
+            .padding(.leading, 30)
+        //Botones abajo
             HStack{
             Button("Añadir"){
                 let client = TClient(context: moc)
@@ -147,7 +151,7 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Actualizar"){
-            
+            //TODO
             }
             .padding(.bottom,70)
             .fixedSize()
@@ -159,13 +163,16 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Borrar", role: .destructive){
-            
+            //TODO
             }
             .padding(.bottom,70)
             .fixedSize()
             
             
+            }
+            .padding(.leading,100)
         }
+        .padding(.trailing,20)
     }
 }
 

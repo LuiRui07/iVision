@@ -15,8 +15,6 @@
 		7B713E38293E15E300909990 /* iVisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0C293E15E200909990 /* iVisionApp.swift */; };
 		7B713E39293E15E300909990 /* Principal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0D293E15E200909990 /* Principal.swift */; };
 		7B713E3A293E15E300909990 /* Principal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E0D293E15E200909990 /* Principal.swift */; };
-		7B713E3D293E15E300909990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B713E0F293E15E300909990 /* Assets.xcassets */; };
-		7B713E3E293E15E300909990 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B713E0F293E15E300909990 /* Assets.xcassets */; };
 		7B713E4F293E16BD00909990 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E4D293E16BD00909990 /* Model.xcdatamodeld */; };
 		7B713E50293E16BD00909990 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B713E4D293E16BD00909990 /* Model.xcdatamodeld */; };
 		7B75DA60293F808A00325034 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B75DA5F293F808A00325034 /* DataController.swift */; };
@@ -45,7 +43,6 @@
 /* Begin PBXFileReference section */
 		7B713E0C293E15E200909990 /* iVisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iVisionApp.swift; sourceTree = "<group>"; };
 		7B713E0D293E15E200909990 /* Principal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Principal.swift; sourceTree = "<group>"; };
-		7B713E0F293E15E300909990 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B713E14293E15E300909990 /* iVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B713E1A293E15E300909990 /* iVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B713E1C293E15E300909990 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
@@ -111,7 +108,6 @@
 				7B87B6502940D23500B92B66 /* Revisiones.swift */,
 				7B75DA5F293F808A00325034 /* DataController.swift */,
 				7B713E4D293E16BD00909990 /* Model.xcdatamodeld */,
-				7B713E0F293E15E300909990 /* Assets.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -278,7 +274,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B713E3D293E15E300909990 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +281,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B713E3E293E15E300909990 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

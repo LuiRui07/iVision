@@ -15,8 +15,10 @@ struct Principal: View  {
     @State private var TNombre: String = ""
     @State private var TApellidos: String = ""
     @State private var TEdad: String = ""
+    @State var navigated = true
     
     var body: some View {
+        //Titulo
         Text("Revisión Ocular")
             .padding()
             .font(.title)
@@ -37,6 +39,7 @@ struct Principal: View  {
     }
        .shadow(color: .black, radius:100)
         
+        //Cuadros de Texto
         VStack{
         HStack{
             Text("NIF")
@@ -65,9 +68,6 @@ struct Principal: View  {
             TextField("", text: $TEdad)
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
-            Button("Revisiones"){
-            // NOSE COMO CAMBIAR DE VENTANA
-            }
             
         }
         }
@@ -91,13 +91,13 @@ struct Principal: View  {
             .fixedSize()
 
             Button("Actualizar"){
-            
+            //TODO
             }
             .padding(10)
             .fixedSize()
             
             Button("Borrar", role: .destructive){
-            
+            //TODO
             }
             .padding(10)
             .fixedSize()
