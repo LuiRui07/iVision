@@ -21,6 +21,8 @@
 		7B75DA61293F808A00325034 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B75DA5F293F808A00325034 /* DataController.swift */; };
 		7B87B6512940D23500B92B66 /* Revisiones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B87B6502940D23500B92B66 /* Revisiones.swift */; };
 		7B87B6522940D23500B92B66 /* Revisiones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B87B6502940D23500B92B66 /* Revisiones.swift */; };
+		7BBEC59D2945CE00004F7112 /* Assets2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEC59C2945CE00004F7112 /* Assets2.xcassets */; };
+		7BBEC59E2945CE00004F7112 /* Assets2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BBEC59C2945CE00004F7112 /* Assets2.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,7 @@
 		7B713E4E293E16BD00909990 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7B75DA5F293F808A00325034 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		7B87B6502940D23500B92B66 /* Revisiones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Revisiones.swift; sourceTree = "<group>"; };
+		7BBEC59C2945CE00004F7112 /* Assets2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets2.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,7 @@
 				7B713E0D293E15E200909990 /* Principal.swift */,
 				7B87B6502940D23500B92B66 /* Revisiones.swift */,
 				7B75DA5F293F808A00325034 /* DataController.swift */,
+				7BBEC59C2945CE00004F7112 /* Assets2.xcassets */,
 				7B713E4D293E16BD00909990 /* Model.xcdatamodeld */,
 			);
 			path = Shared;
@@ -274,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBEC59D2945CE00004F7112 /* Assets2.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBEC59E2945CE00004F7112 /* Assets2.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

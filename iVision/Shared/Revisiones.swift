@@ -142,10 +142,14 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Limpiar"){
-                Tnif = ""
-                TNombre = ""
-                TApellidos = ""
-                TEdad = ""
+                Od_esfera = ""
+                Od_cilindro  = ""
+                Od_adicion  = ""
+                Od_agudeza  = ""
+                Oi_esfera  = ""
+                Oi_cilindro  = ""
+                Oi_adicion  = ""
+                Oi_agudeza  = ""
             }
             .padding(.top,70)
             .fixedSize()

@@ -102,7 +102,7 @@ struct Principal: View  {
             .padding(10)
             .fixedSize()
             
-            Button("Limpiar"){
+            Button("    "){
                 Tnif = ""
                 TNombre = ""
                 TApellidos = ""
