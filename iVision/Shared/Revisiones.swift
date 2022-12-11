@@ -48,6 +48,10 @@ struct Revisiones: View{
                        .padding()
                    Text(String(datos.od_cilindro))
                        .padding()
+                   Text(String(datos.od_cilindro))
+                       .padding()
+                   Text(String(datos.od_cilindro))
+                       .padding()
                }
             }
     }
@@ -65,6 +69,7 @@ struct Revisiones: View{
                 TextField(" ", text: $Oi_esfera)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
+                    
                     
             }
             
@@ -162,7 +167,8 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Salir"){
-                exit(0)
+            exit(0)
+            //Deberia volver a principal
             }
             .padding(.top,70)
             .fixedSize()
@@ -180,6 +186,7 @@ struct Revisiones: View{
         .padding(.trailing,20)
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -14,7 +14,8 @@ struct iVisionApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Revisiones()
+            //Revisiones()
+            P()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }

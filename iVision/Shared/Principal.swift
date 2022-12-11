@@ -8,14 +8,21 @@
 import SwiftUI
 import CoreData
 
+struct UserOcular {
+    var Nif: String
+    var Nombre : String
+    var Apellidos : String
+    var Edad : String
+}
+
 struct Principal: View  {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
-    @State private var Tnif: String = ""
-    @State private var TNombre: String = ""
-    @State private var TApellidos: String = ""
-    @State private var TEdad: String = ""
-    @State var navigated = true
+    @State public var Tnif: String = ""
+    @State public var TNombre: String = ""
+    @State public var TApellidos: String = ""
+    @State public var TEdad: String = ""
+    @State private var navigated = false
     
     var body: some View {
         //Titulo
@@ -70,9 +77,16 @@ struct Principal: View  {
             TextField("", text: $TEdad)
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
-            Button("Revisiones"){
-                //Conecta con revisiones
+            
+            Button(action: {
+                self.navigated.toggle()
+            }, label: {
+            Text("Revisiones")
+            })
+            .sheet(isPresented: $navigated){
+                Revisiones()
             }
+            //Conecta con revisiones
             
         }
         }
@@ -128,7 +142,6 @@ struct Principal: View  {
         
         }
 
-    
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
