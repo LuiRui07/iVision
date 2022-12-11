@@ -42,15 +42,11 @@ struct Revisiones: View{
         
         //Tabla
        VStack {
-           List(clients) { client in
+           List(datos) { datos in
                HStack{
-                Text(client.nif ?? "Unknown")
+                   Text(String(datos.od_esfera))
                        .padding()
-                Text(client.nombre ?? "Unknown")
-                       .padding()
-                Text(client.apellidos ?? "Unknown")
-                       .padding()
-                Text(String(client.edad))
+                   Text(String(datos.od_cilindro))
                        .padding()
                }
             }
@@ -130,11 +126,16 @@ struct Revisiones: View{
         //Botones abajo
             HStack{
             Button("Añadir"){
-                let client = TClient(context: moc)
-                client.nif = Tnif
-                client.nombre = TNombre
-                client.apellidos = TApellidos
-                client.edad = Int16(TEdad) ?? 0
+                let eye = TEye (context: moc)
+                
+                eye.od_esfera = Double(Od_esfera) ?? 0
+                eye.od_cilindro = Double(Od_cilindro) ?? 0
+                eye.od_adicion = Double(Od_adicion) ?? 0
+                eye.od_agudeza = Double(Od_agudeza) ?? 0
+                eye.oi_esfera = Double(Oi_esfera) ?? 0
+                eye.oi_cilindro = Double(Oi_cilindro) ?? 0
+                eye.oi_adicion = Double(Oi_adicion) ?? 0
+                eye.oi_agudeza = Double(Oi_agudeza) ?? 0
                     
                 try? moc.save()
             }

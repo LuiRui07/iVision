@@ -25,7 +25,7 @@ struct Principal: View  {
         //Tabla
        VStack {
            List(clients) { client in
-               HStack{
+                HStack{
                 Text(client.nif ?? "Unknown")
                        .padding()
                 Text(client.nombre ?? "Unknown")
@@ -47,6 +47,7 @@ struct Principal: View  {
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
         }
+        .padding(.trailing,75)
         
         HStack{
             Text("Nombre")
@@ -54,7 +55,7 @@ struct Principal: View  {
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
         }
-        
+        .padding(.trailing,103)
         
         HStack{
             Text("Apellidos")
@@ -62,12 +63,16 @@ struct Principal: View  {
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
         }
+        .padding(.trailing,112)
         
         HStack{
             Text("Edad")
             TextField("", text: $TEdad)
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
+            Button("Revisiones"){
+                //Conecta con revisiones
+            }
             
         }
         }
@@ -102,7 +107,7 @@ struct Principal: View  {
             .padding(10)
             .fixedSize()
             
-            Button("    "){
+            Button("Limpiar"){
                 Tnif = ""
                 TNombre = ""
                 TApellidos = ""
