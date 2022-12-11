@@ -10,12 +10,11 @@ import SwiftUI
 @main
 struct iVisionApp: App {
     @StateObject private var dataController = DataController()
-    private var c = false
 
     var body: some Scene {
         WindowGroup {
             //Revisiones()
-            P()
+            Principal()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }

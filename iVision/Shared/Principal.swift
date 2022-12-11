@@ -8,16 +8,24 @@
 import SwiftUI
 import CoreData
 
-struct UserOcular {
+class UserOcular {
     var Nif: String
     var Nombre : String
     var Apellidos : String
     var Edad : String
+    
+    init(){
+    Nif = ""
+    Nombre = ""
+    Apellidos = ""
+    Edad = ""
+    }
 }
 
 struct Principal: View  {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
+    @State var us = UserOcular()
     @State public var Tnif: String = ""
     @State public var TNombre: String = ""
     @State public var TApellidos: String = ""
@@ -93,7 +101,6 @@ struct Principal: View  {
         .frame(width: 1000)
         .multilineTextAlignment(.leading)
         .padding()
-        //COMO COÑO SE COLOCA TODO PEGADO A LA IZQUIERDA COÑO
 
         //Botones abajo
         HStack{
@@ -122,8 +129,8 @@ struct Principal: View  {
             .fixedSize()
             
             Button("Limpiar"){
-                Tnif = ""
                 TNombre = ""
+                Tnif = ""
                 TApellidos = ""
                 TEdad = ""
             }
