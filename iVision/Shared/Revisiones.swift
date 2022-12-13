@@ -11,10 +11,11 @@ import CoreData
 
 struct Revisiones: View{
     @Environment(\.managedObjectContext) var moc
-    @State public var Tnif: String = "77227286W"
-    @State public var TNombre: String = "Luis"
-    @State public var TApellidos: String = "Ruiz"
-    @State public var TEdad: String = "10"
+    @Environment(\.dismiss) var dismiss
+    @State public var nifPersona: String
+    @State public var nombrePersona: String
+    @State public var apellidosPersona: String
+    @State public var edadPersona: String
     @State public var currentDate: Date = Date()
     
     @State public var Od_esfera: String = ""
@@ -34,7 +35,7 @@ struct Revisiones: View{
     var body: some View {
         //Titulo
         VStack{
-            let Todo =  Tnif + ";" + TNombre + ";" + TApellidos + ";" + TEdad
+            let Todo =  nifPersona + ";" + nombrePersona + ";" + apellidosPersona + ";" + edadPersona
             Text(Todo)
         }
         .padding()
@@ -157,7 +158,9 @@ struct Revisiones: View{
             HStack{
             Button("Añadir"){
                 let eye = TEye (context: moc)
-                
+                eye.nif = nifPersona
+               //eye.id =
+                eye.consulta = currentDate
                 eye.od_esfera = Double(Od_esfera) ?? 0
                 eye.od_cilindro = Double(Od_cilindro) ?? 0
                 eye.od_adicion = Double(Od_adicion) ?? 0
@@ -192,8 +195,7 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Salir"){
-            exit(0)
-            //Deberia volver a principal
+            dismiss()
             }
             .padding(.top,70)
             .fixedSize()
@@ -216,7 +218,7 @@ struct Revisiones: View{
     }
 }
 
-
+/*
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -232,3 +234,4 @@ struct ContentView_Previews: PreviewProvider {
         }
         }
     }
+*/

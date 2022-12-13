@@ -8,29 +8,15 @@
 import SwiftUI
 import CoreData
 
-class UserOcular {
-    var Nif: String
-    var Nombre : String
-    var Apellidos : String
-    var Edad : String
-    
-    init(){
-    Nif = ""
-    Nombre = ""
-    Apellidos = ""
-    Edad = ""
-    }
-}
-
 struct Principal: View  {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
-    @State var us = UserOcular()
     @State public var Tnif: String = ""
     @State public var TNombre: String = ""
     @State public var TApellidos: String = ""
     @State public var TEdad: String = ""
     @State private var navigated = false
+    @State private var esta = false
     
     var body: some View {
         //Titulo
@@ -101,9 +87,8 @@ struct Principal: View  {
             Text("Revisiones")
             })
             .sheet(isPresented: $navigated){
-                Revisiones()
+                Revisiones(nifPersona: Tnif, nombrePersona: TNombre, apellidosPersona: TApellidos, edadPersona: TEdad)
             }
-            //Conecta con revisiones
             
         }
         }
@@ -114,13 +99,20 @@ struct Principal: View  {
         //Botones abajo
         HStack{
             Button("Añadir"){
+            esta = false
+            for c in clients{
+                    if c.nif == Tnif{
+                        esta = true
+                    }
+            }
+            if (esta == false){
                 let client = TClient(context: moc)
                 client.nif = Tnif
                 client.nombre = TNombre
                 client.apellidos = TApellidos
                 client.edad = Int16(TEdad) ?? 0
-                    
-                try? moc.save()
+            }
+            try? moc.save()
             }
             .padding(10)
             .fixedSize()
