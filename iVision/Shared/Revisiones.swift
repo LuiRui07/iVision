@@ -41,16 +41,41 @@ struct Revisiones: View{
         .font(.title)
         
         //Tabla
+        HStack{
+          Text("ID")
+          Text("NIF")
+          Text("CONSULTA")
+          Text("OD_ESFERA")
+          Text("OD_CILINDRO")
+          Text("OD_ADICION")
+          Text("OD_AGUDEZA")
+        }
+        .padding(.trailing, 750)
+        
        VStack {
            List(datos) { datos in
                HStack{
+                   Text(datos.id?.uuidString ?? "1")
+                       .padding()
+                   Text(datos.nif ?? "Unknown")
+                       .padding()
+                   // Text (datos.consulta) no va
+                    //   .padding()
                    Text(String(datos.od_esfera))
                        .padding()
                    Text(String(datos.od_cilindro))
                        .padding()
-                   Text(String(datos.od_cilindro))
+                   Text(String(datos.od_adicion))
                        .padding()
-                   Text(String(datos.od_cilindro))
+                   Text(String(datos.od_agudeza))
+                       .padding()
+                   Text(String(datos.oi_esfera))
+                       .padding()
+                   Text(String(datos.oi_cilindro))
+                       .padding()
+                   Text(String(datos.oi_adicion))
+                       .padding()
+                   Text(String(datos.oi_agudeza))
                        .padding()
                }
             }
@@ -174,7 +199,11 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Borrar", role: .destructive){
-            //TODO
+            for index in datos.indices{
+                let eliminar = datos[index]
+                moc.delete(eliminar)
+                }
+                try? moc.save()
             }
             .padding(.bottom,70)
             .fixedSize()

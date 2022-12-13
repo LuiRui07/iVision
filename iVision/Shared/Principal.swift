@@ -37,7 +37,16 @@ struct Principal: View  {
         Text("Revisión Ocular")
             .padding()
             .font(.title)
+        
         //Tabla
+        HStack{
+          Text("NIF")
+          Text("Nombre")
+          Text("Apellidos")
+          Text("Edad")
+        }
+        .padding(.trailing, 750)
+        
        VStack {
            List(clients) { client in
                 HStack{
@@ -117,13 +126,33 @@ struct Principal: View  {
             .fixedSize()
 
             Button("Actualizar"){
-            //TODO
+                for c in clients{
+                    if c.nif == Tnif{
+                        if c.nombre != TNombre{
+                            c.nombre = TNombre
+                        }
+                        if c.apellidos != TApellidos{
+                            c.apellidos = TApellidos
+                        }
+                        if c.edad != Int16(TEdad){
+                            c.edad = Int16(TEdad)!
+                        }
+                    }
+            }
+                try? moc.save()
             }
             .padding(10)
             .fixedSize()
             
             Button("Borrar", role: .destructive){
-            //TODO
+                for c in clients{
+                    if c.nif == Tnif{
+                        let index = clients.firstIndex(of: c)
+                        let eliminar = clients[index!]
+                        moc.delete(eliminar)
+                    }
+            }
+                try? moc.save()
             }
             .padding(10)
             .fixedSize()

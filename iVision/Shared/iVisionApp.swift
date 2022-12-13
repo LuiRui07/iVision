@@ -13,7 +13,6 @@ struct iVisionApp: App {
 
     var body: some Scene {
         WindowGroup {
-            //Revisiones()
             Principal()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
