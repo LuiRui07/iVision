@@ -26,16 +26,22 @@ struct Principal: View  {
         
         //Tabla
         HStack{
-          Text("NIF")
+          Text("NIF          ")
           Text("Nombre")
           Text("Apellidos")
           Text("Edad")
         }
-        .padding(.trailing, 750)
+        .padding(.trailing, 1150)
         
        VStack {
            List(clients) { client in
                 HStack{
+                Button(""){
+                        TNombre = client.nombre ?? ""
+                        Tnif = client.nif ?? ""
+                        TApellidos = client.apellidos ?? ""
+                        TEdad = String(client.edad)
+                }
                 Text(client.nif ?? "Unknown")
                        .padding()
                 Text(client.nombre ?? "Unknown")
@@ -44,10 +50,12 @@ struct Principal: View  {
                        .padding()
                 Text(String(client.edad))
                        .padding()
+
                }
             }
     }
        .shadow(color: .black, radius:100)
+       .listStyle(InsetListStyle())
         
         //Cuadros de Texto
         VStack{
