@@ -51,8 +51,11 @@ struct Revisiones: View{
           Text("OD_CILINDRO")
           Text("OD_ADICION")
           Text("OD_AGUDEZA")
+          Text("OI_ESFERA" +  "    "  +   "OI_CILINDRO")
+          Text("OI_ADICION" +  "    " +   "OI_AGUDEZA")
+            
         }
-        .padding(.trailing, 500)
+        .padding()
         
        VStack {
            List(datos) { dato in
