@@ -10,6 +10,9 @@ import SwiftUI
 import CoreData
 
 
+func FechaaString (fecha : Date) -> String{
+    return fecha.ISO8601Format()
+}
 
 struct Revisiones: View{
     @Environment(\.managedObjectContext) var moc
@@ -20,7 +23,9 @@ struct Revisiones: View{
     @State public var edadPersona: String
     
     
+    @State public var idRevision : UUID = UUID()
     @State public var tDate: Date = Date()
+    
     @State public var tOd_esfera: String = ""
     @State public var tOd_cilindro : String = ""
     @State public var tOd_adicion : String = ""
@@ -31,8 +36,6 @@ struct Revisiones: View{
     @State public var tOi_adicion : String = ""
     @State public var tOi_agudeza : String = ""
     
-    
-    @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
     @FetchRequest(sortDescriptors: []) var datos: FetchedResults<TEye>
     
     var body: some View {
@@ -57,44 +60,45 @@ struct Revisiones: View{
         .padding(.trailing, 750)
         
        VStack {
-           List(datos) { datos in
+           List(datos) { dato in
+               if (dato.nif == nifPersona){
                HStack{
                    Button(""){
-                       tOd_esfera = String(datos.od_esfera)
-                       tOd_cilindro = String(datos.od_cilindro)
-                       tOd_adicion = String(datos.od_adicion)
-                       tOd_agudeza = String(datos.od_agudeza)
+                       tOd_esfera = String(dato.od_esfera)
+                       tOd_cilindro = String(dato.od_cilindro)
+                       tOd_adicion = String(dato.od_adicion)
+                       tOd_agudeza = String(dato.od_agudeza)
                        
-                       tOi_esfera = String(datos.oi_esfera)
-                       tOi_cilindro = String(datos.oi_cilindro)
-                       tOi_adicion = String(datos.oi_adicion)
-                       tOi_agudeza = String(datos.oi_agudeza)
-                       tDate = datos.consulta ?? Date.now
+                       tOi_esfera = String(dato.oi_esfera)
+                       tOi_cilindro = String(dato.oi_cilindro)
+                       tOi_adicion = String(dato.oi_adicion)
+                       tOi_agudeza = String(dato.oi_agudeza)
+                       tDate = dato.consulta!
+                       idRevision = dato.id!
+                
                    }
-                   Text(datos.id?.uuidString ?? "1") /// WTF
+                   
+                   Text(dato.id?.uuidString ?? "1")
                        .padding()
-                   Text(datos.nif ?? "Unknown")
+                   Text(dato.nif ?? "Unknown")
                        .padding()
-                  // Text (datos.consulta) // Putas fechas
-                  //     .padding()      //
-                   Text(String(datos.od_esfera))
+                   Text(dato.consulta!.ISO8601Format())     //PUTA FECHA
                        .padding()
-                   Text(String(datos.od_cilindro))
+                   Text(String(dato.od_esfera))
                        .padding()
-                   Text(String(datos.od_adicion))
+                   Text(String(dato.od_cilindro))
                        .padding()
-                   Text(String(datos.od_agudeza))
+                   Text(String(dato.od_adicion))
                        .padding()
-                   Text(String(datos.oi_esfera))
+                   Text(String(dato.od_agudeza))
                        .padding()
-                   Text(String(datos.oi_cilindro))
+                   Text(String(dato.oi_esfera) + "      " + String(dato.oi_cilindro))
                        .padding()
-                   Text(String(datos.oi_adicion))
+                   Text(String(dato.oi_adicion) + "      " + String(dato.oi_agudeza))
                        .padding()
-                   //Text(String(datos.oi_agudeza))   ///SE ralla porque hay muchos elementos
-                      // .padding()
-               }
+                }
             }
+        }
     }
        .shadow(color: .black, radius:100)
     
@@ -178,7 +182,7 @@ struct Revisiones: View{
             Button("Añadir"){
                 let eye = TEye (context: moc)
                 eye.nif = nifPersona
-               //eye.id =
+                eye.id = UUID()
                 eye.consulta = tDate
                 eye.od_esfera = Double(tOd_esfera) ?? 0
                 eye.od_cilindro = Double(tOd_cilindro) ?? 0
@@ -188,7 +192,7 @@ struct Revisiones: View{
                 eye.oi_cilindro = Double(tOi_cilindro) ?? 0
                 eye.oi_adicion = Double(tOi_adicion) ?? 0
                 eye.oi_agudeza = Double(tOi_agudeza) ?? 0
-                    
+                
                 try? moc.save()
             }
             .padding(.bottom,70)
@@ -208,7 +212,37 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Actualizar"){
-            //TODO
+                
+                for d in datos{
+                    print(idRevision)
+                    if d.id == idRevision{
+                        if (d.od_esfera != Double(tOd_esfera)){
+                            d.od_esfera = Double(tOd_esfera) ?? 0
+                        }
+                        if (d.od_cilindro != Double(tOd_cilindro)){
+                            d.od_cilindro = Double(tOd_cilindro) ?? 0
+                        }
+                        if (d.od_agudeza != Double(tOd_agudeza)){
+                            d.od_agudeza = Double(tOd_agudeza) ?? 0
+                        }
+                        if (d.od_adicion != Double(tOd_adicion)){
+                            d.od_adicion = Double(tOd_adicion) ?? 0
+                        }
+                        if (d.oi_esfera != Double(tOi_esfera)){
+                            d.oi_esfera = Double(tOi_esfera) ?? 0
+                        }
+                        if (d.oi_cilindro != Double(tOi_cilindro)){
+                            d.oi_cilindro = Double(tOi_cilindro) ?? 0
+                        }
+                        if (d.oi_agudeza != Double(tOi_agudeza)){
+                            d.oi_agudeza = Double(tOi_agudeza) ?? 0
+                        }
+                        if (d.oi_adicion != Double(tOi_adicion)){
+                            d.oi_adicion = Double(tOi_adicion) ?? 0
+                        }
+                    }
+            }
+                try? moc.save()
             }
             .padding(.bottom,70)
             .fixedSize()
@@ -220,10 +254,13 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Borrar", role: .destructive){
-            for index in datos.indices{        //BOrra todo ahora mismo
-                let eliminar = datos[index]
-                moc.delete(eliminar)
-                }
+                for d in datos{
+                    if d.id == idRevision{
+                        let index = datos.firstIndex(of: d)
+                        let eliminar = datos[index!]
+                        moc.delete(eliminar)
+                    }
+            }
                 try? moc.save()
             }
             .padding(.bottom,70)
