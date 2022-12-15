@@ -56,6 +56,7 @@ struct Revisiones: View{
         .font(.title)
 
         //Tabla
+        HStack{
            Table(datos) {
                TableColumn("ID"){ dato in
                    if (dato.nif == nifPersona){
@@ -76,6 +77,9 @@ struct Revisiones: View{
                            })
                    }
                }
+           }
+           .frame(width: 350)
+            Table(datos){
                 TableColumn("NIF"){ dato in
                        if (dato.nif == nifPersona){
                            Text(dato.nif ?? "Unknown")
@@ -95,6 +99,7 @@ struct Revisiones: View{
                                })
                        }
                 }
+
                TableColumn("CONSULTA"){ dato in
                       if (dato.nif == nifPersona){
                           Text(FechaaString(fecha:dato.consulta ?? Date.now))     //""
@@ -247,7 +252,7 @@ struct Revisiones: View{
                               })
                       }
                }
-               /*  EL PUTRO PROGRAMA PETA PORQUE NO AGUANTA 11 VISTAS
+
                 TableColumn("OI_AGUDEZA"){ dato in
                        if (dato.nif == nifPersona){
                            Text(String(dato.oi_agudeza))
@@ -267,9 +272,10 @@ struct Revisiones: View{
                                })
                        }
                 }
-                */
+                
                 }
                 .shadow(color: .black, radius:100)
+        }
       
     
         //Cuadros de Texto
