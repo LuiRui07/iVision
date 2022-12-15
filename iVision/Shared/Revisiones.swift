@@ -173,7 +173,7 @@ struct Revisiones: View{
             
         //Calendario
             VStack{
-            DatePicker("", selection: $tDate)
+                DatePicker("", selection: $tDate, displayedComponents: [.date])
             Text(tDate, style: .date)
                 .font(.largeTitle)
                 .bold()
@@ -213,6 +213,7 @@ struct Revisiones: View{
                 tOi_cilindro  = ""
                 tOi_adicion  = ""
                 tOi_agudeza  = ""
+                tDate = Date.now
             }
             .padding(.top,70)
             .fixedSize()
