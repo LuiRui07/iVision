@@ -54,64 +54,223 @@ struct Revisiones: View{
         }
         .padding()
         .font(.title)
-        
+
         //Tabla
-        HStack{
-          Text("ID")
-          Text("NIF")
-          Text("CONSULTA")
-          Text("OD_ESFERA")
-          Text("OD_CILINDRO")
-          Text("OD_ADICION")
-          Text("OD_AGUDEZA")
-          Text("OI_ESFERA" +  "    "  +   "OI_CILINDRO")
-          Text("OI_ADICION" +  "    " +   "OI_AGUDEZA")
-            
-        }
-        .padding()
-        
-       VStack {
-           List(datos) { dato in
-               if (dato.nif == nifPersona){
-               HStack{
-                   Button(""){
-                       tOd_esfera = String(dato.od_esfera)
-                       tOd_cilindro = String(dato.od_cilindro)
-                       tOd_adicion = String(dato.od_adicion)
-                       tOd_agudeza = String(dato.od_agudeza)
-                       
-                       tOi_esfera = String(dato.oi_esfera)
-                       tOi_cilindro = String(dato.oi_cilindro)
-                       tOi_adicion = String(dato.oi_adicion)
-                       tOi_agudeza = String(dato.oi_agudeza)
-                       
-                       tDate = dato.consulta!
-                       idRevision = dato.id!
+           Table(datos) {
+               TableColumn("ID"){ dato in
+                   if (dato.nif == nifPersona){
+                       Text(dato.id?.uuidString ?? "1")
+                           .onTapGesture(count: 1, perform: {
+                               tOd_esfera = String(dato.od_esfera)
+                               tOd_cilindro = String(dato.od_cilindro)
+                               tOd_adicion = String(dato.od_adicion)
+                               tOd_agudeza = String(dato.od_agudeza)
+                               
+                               tOi_esfera = String(dato.oi_esfera)
+                               tOi_cilindro = String(dato.oi_cilindro)
+                               tOi_adicion = String(dato.oi_adicion)
+                               tOi_agudeza = String(dato.oi_agudeza)
+                               
+                               tDate = dato.consulta!
+                               idRevision = dato.id!
+                           })
                    }
-                   
-                   Text(dato.id?.uuidString ?? "1")
-                       .padding()
-                   Text(dato.nif ?? "Unknown")
-                       .padding()
-                   Text(FechaaString(fecha:dato.consulta ?? Date.now))     //PUTA FECHA
-                       .padding()
-                   Text(String(dato.od_esfera))
-                       .padding()
-                   Text(String(dato.od_cilindro))
-                       .padding()
-                   Text(String(dato.od_adicion))
-                       .padding()
-                   Text(String(dato.od_agudeza))
-                       .padding()
-                   Text(String(dato.oi_esfera) + "      " + String(dato.oi_cilindro))
-                       .padding()
-                   Text(String(dato.oi_adicion) + "      " + String(dato.oi_agudeza))
-                       .padding()
+               }
+                TableColumn("NIF"){ dato in
+                       if (dato.nif == nifPersona){
+                           Text(dato.nif ?? "Unknown")
+                               .onTapGesture(count: 1, perform: {
+                                   tOd_esfera = String(dato.od_esfera)
+                                   tOd_cilindro = String(dato.od_cilindro)
+                                   tOd_adicion = String(dato.od_adicion)
+                                   tOd_agudeza = String(dato.od_agudeza)
+                                   
+                                   tOi_esfera = String(dato.oi_esfera)
+                                   tOi_cilindro = String(dato.oi_cilindro)
+                                   tOi_adicion = String(dato.oi_adicion)
+                                   tOi_agudeza = String(dato.oi_agudeza)
+                                   
+                                   tDate = dato.consulta!
+                                   idRevision = dato.id!
+                               })
+                       }
                 }
-            }
-        }
-    }
-       .shadow(color: .black, radius:100)
+               TableColumn("CONSULTA"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(FechaaString(fecha:dato.consulta ?? Date.now))     //""
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               TableColumn("OD_ESFERA"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(String(dato.od_esfera))
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               TableColumn("OD_CILINDRO"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(String(dato.od_cilindro))
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               TableColumn("OD_ADICION"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(String(dato.od_adicion))
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               TableColumn("OD_AGUDEZA"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(String(dato.od_agudeza))
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               TableColumn("OI_ESFERA"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(String(dato.oi_esfera))
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               TableColumn("OI_CILINDRO"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(String(dato.oi_cilindro))
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               TableColumn("OI_ADICION"){ dato in
+                      if (dato.nif == nifPersona){
+                          Text(String(dato.oi_adicion))
+                              .onTapGesture(count: 1, perform: {
+                                  tOd_esfera = String(dato.od_esfera)
+                                  tOd_cilindro = String(dato.od_cilindro)
+                                  tOd_adicion = String(dato.od_adicion)
+                                  tOd_agudeza = String(dato.od_agudeza)
+                                  
+                                  tOi_esfera = String(dato.oi_esfera)
+                                  tOi_cilindro = String(dato.oi_cilindro)
+                                  tOi_adicion = String(dato.oi_adicion)
+                                  tOi_agudeza = String(dato.oi_agudeza)
+                                  
+                                  tDate = dato.consulta!
+                                  idRevision = dato.id!
+                              })
+                      }
+               }
+               /*  EL PUTRO PROGRAMA PETA PORQUE NO AGUANTA 11 VISTAS
+                TableColumn("OI_AGUDEZA"){ dato in
+                       if (dato.nif == nifPersona){
+                           Text(String(dato.oi_agudeza))
+                               .onTapGesture(count: 1, perform: {
+                                   tOd_esfera = String(dato.od_esfera)
+                                   tOd_cilindro = String(dato.od_cilindro)
+                                   tOd_adicion = String(dato.od_adicion)
+                                   tOd_agudeza = String(dato.od_agudeza)
+                                   
+                                   tOi_esfera = String(dato.oi_esfera)
+                                   tOi_cilindro = String(dato.oi_cilindro)
+                                   tOi_adicion = String(dato.oi_adicion)
+                                   tOi_agudeza = String(dato.oi_agudeza)
+                                   
+                                   tDate = dato.consulta!
+                                   idRevision = dato.id!
+                               })
+                       }
+                }
+                */
+                }
+                .shadow(color: .black, radius:100)
+      
     
         //Cuadros de Texto
             VStack{
@@ -283,21 +442,3 @@ struct Revisiones: View{
         .padding(.trailing,20)
     }
 }
-
-/*
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            Revisiones()
-                .preferredColorScheme(.dark)
-                .padding(0.0)
-                .environment(\.sizeCategory, .large)
-            .previewLayout(.sizeThatFits)
-            Revisiones()
-                .environment(\.sizeCategory, .large)
-            Revisiones()
-                .environment(\.sizeCategory, .large)
-        }
-        }
-    }
-*/

@@ -23,37 +23,46 @@ struct Principal: View  {
         Text("Revisión Ocular")
             .padding()
             .font(.title)
-        
-        //Tabla
-        HStack{
-          Text("NIF             ")
-          Text("Nombre  ")
-          Text("Apellidos       ")
-          Text("Edad")
-        }
-        .padding(.trailing, 1070)
-        
-       VStack {
-           List(clients) { client in
-                HStack{
-                Button(""){
-                        TNombre = client.nombre ?? ""
-                        Tnif = client.nif ?? ""
-                        TApellidos = client.apellidos ?? ""
-                        TEdad = String(client.edad)
-                }
-                Text(client.nif ?? "Unknown")
-                       .padding()
-                Text(client.nombre ?? "Unknown")
-                       .padding()
-                Text(client.apellidos ?? "Unknown")
-                       .padding()
-                Text(String(client.edad))
-                       .padding()
 
+        //Tabla
+           Table(clients) {
+               TableColumn("NIF"){ client in
+                   Text(client.nif ?? "Unknown")
+                       .onTapGesture(count: 1, perform: {
+                           TNombre = client.nombre ?? ""
+                           Tnif = client.nif ?? ""
+                           TApellidos = client.apellidos ?? ""
+                           TEdad = String(client.edad)
+                       })
                }
-            }
-    }
+               TableColumn("Nombre"){ client in
+                   Text(client.nombre ?? "Unknown")
+                       .onTapGesture(count: 1, perform: {
+                           TNombre = client.nombre ?? ""
+                           Tnif = client.nif ?? ""
+                           TApellidos = client.apellidos ?? ""
+                           TEdad = String(client.edad)
+                       })
+               }
+               TableColumn("Apellidos"){ client in
+                   Text(client.apellidos ?? "Unknown")
+                       .onTapGesture(count: 1, perform: {
+                           TNombre = client.nombre ?? ""
+                           Tnif = client.nif ?? ""
+                           TApellidos = client.apellidos ?? ""
+                           TEdad = String(client.edad)
+                       })
+               }
+               TableColumn("Edad"){ client in
+                   Text(String(client.edad))
+                       .onTapGesture(count: 1, perform: {
+                           TNombre = client.nombre ?? ""
+                           Tnif = client.nif ?? ""
+                           TApellidos = client.apellidos ?? ""
+                           TEdad = String(client.edad)
+                       })
+               }
+        }
        .shadow(color: .black, radius:100)
        .listStyle(InsetListStyle())
         
