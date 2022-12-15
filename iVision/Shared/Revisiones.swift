@@ -9,11 +9,6 @@ import Foundation
 import SwiftUI
 import CoreData
 
-
-func FechaaString (fecha : Date) -> String{
-    return fecha.ISO8601Format()
-}
-
 struct Revisiones: View{
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
@@ -57,7 +52,7 @@ struct Revisiones: View{
           Text("OD_ADICION")
           Text("OD_AGUDEZA")
         }
-        .padding(.trailing, 750)
+        .padding(.trailing, 500)
         
        VStack {
            List(datos) { dato in

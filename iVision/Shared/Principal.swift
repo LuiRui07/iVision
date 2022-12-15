@@ -26,12 +26,12 @@ struct Principal: View  {
         
         //Tabla
         HStack{
-          Text("NIF          ")
-          Text("Nombre")
-          Text("Apellidos")
+          Text("NIF             ")
+          Text("Nombre  ")
+          Text("Apellidos       ")
           Text("Edad")
         }
-        .padding(.trailing, 1150)
+        .padding(.trailing, 1070)
         
        VStack {
            List(clients) { client in
