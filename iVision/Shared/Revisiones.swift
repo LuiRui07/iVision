@@ -9,6 +9,19 @@ import Foundation
 import SwiftUI
 import CoreData
 
+func FechaaString (fecha : Date) -> String {
+    let s = fecha.ISO8601Format()
+    let index = s.firstIndex(of: "T") ?? s.endIndex
+    let beginning = s[..<index]
+    let newString = String(beginning)
+    
+    let ar = newString.split(separator: "-")
+    let newString2 = String((String(Int(ar[2])!+1)) + "/" + ar[1] + "/" + ar[0])
+
+    
+    return newString2
+}
+
 struct Revisiones: View{
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
@@ -71,16 +84,16 @@ struct Revisiones: View{
                        tOi_cilindro = String(dato.oi_cilindro)
                        tOi_adicion = String(dato.oi_adicion)
                        tOi_agudeza = String(dato.oi_agudeza)
+                       
                        tDate = dato.consulta!
                        idRevision = dato.id!
-                
                    }
                    
                    Text(dato.id?.uuidString ?? "1")
                        .padding()
                    Text(dato.nif ?? "Unknown")
                        .padding()
-                   Text(dato.consulta!.ISO8601Format())     //PUTA FECHA
+                   Text(FechaaString(fecha:dato.consulta ?? Date.now))     //PUTA FECHA
                        .padding()
                    Text(String(dato.od_esfera))
                        .padding()
@@ -112,8 +125,6 @@ struct Revisiones: View{
                 TextField(" ", text: $tOi_esfera)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
-                    
-                    
             }
             
             HStack{
@@ -151,10 +162,7 @@ struct Revisiones: View{
                 TextField(" ", text: $tOi_agudeza)
                     .frame(width: 400)
                     .textFieldStyle(.roundedBorder)
-                    
                 }
-
-                
             }
             .frame(width: 1000)
             .multilineTextAlignment(.leading)
@@ -237,6 +245,9 @@ struct Revisiones: View{
                         }
                         if (d.oi_adicion != Double(tOi_adicion)){
                             d.oi_adicion = Double(tOi_adicion) ?? 0
+                        }
+                        if (d.consulta != tDate){
+                            d.consulta = tDate
                         }
                     }
             }
