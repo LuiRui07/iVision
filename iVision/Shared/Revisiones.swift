@@ -16,7 +16,7 @@ func FechaaString (fecha : Date) -> String {
     let newString = String(beginning)
     
     let ar = newString.split(separator: "-")
-    let newString2 = String((String(Int(ar[2])!+1)) + "/" + ar[1] + "/" + ar[0])
+    let newString2 = String(ar[2] + "/" + ar[1] + "/" + ar[0])
 
     
     return newString2
@@ -45,7 +45,8 @@ struct Revisiones: View{
     @State public var tOi_agudeza : String = ""
     
     @FetchRequest(sortDescriptors: []) var datos: FetchedResults<TEye>
-    
+
+                                                    
     var body: some View {
         //Titulo
         VStack{
@@ -102,7 +103,7 @@ struct Revisiones: View{
 
                TableColumn("CONSULTA"){ dato in
                       if (dato.nif == nifPersona){
-                          Text(FechaaString(fecha:dato.consulta ?? Date.now))     //""
+                          Text(FechaaString(fecha:dato.consulta ?? Date.now))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
                                   tOd_cilindro = String(dato.od_cilindro)
@@ -119,7 +120,7 @@ struct Revisiones: View{
                               })
                       }
                }
-               TableColumn("OD_ESFERA"){ dato in
+                TableColumn("OD_ESFERA"){ dato in
                       if (dato.nif == nifPersona){
                           Text(String(dato.od_esfera))
                               .onTapGesture(count: 1, perform: {
@@ -364,7 +365,7 @@ struct Revisiones: View{
                 eye.oi_adicion = Double(tOi_adicion) ?? 0
                 eye.oi_agudeza = Double(tOi_agudeza) ?? 0
                 
-                try? moc.save()
+                try? moc.save()   //No estoy tan seguro deque se guarde
             }
             .padding(.bottom,70)
             .fixedSize()
