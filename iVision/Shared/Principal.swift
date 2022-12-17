@@ -16,8 +16,9 @@ struct Principal: View  {
     @State public var TApellidos: String = ""
     @State public var TEdad: String = ""
     @State private var navigated = false
+    @State private var navegar = false
     @State private var esta = false
-    @State private var presented = false
+    @State private var nulo = false
     
     var body: some View {
         //Titulo
@@ -100,12 +101,22 @@ struct Principal: View  {
                 .textFieldStyle(.roundedBorder)
             
             Button(action: {
+                nulo = false;
                 self.navigated.toggle()
+                if (Tnif == ""){
+                    nulo.toggle()
+                }
+                navegar = navigated && !nulo
             }, label: {
             Text("Revisiones")
             })
-            .sheet(isPresented: $navigated){
+            .sheet(isPresented: $navegar){
                 Revisiones(nifPersona: Tnif, nombrePersona: TNombre, apellidosPersona: TApellidos, edadPersona: TEdad)
+            }
+            .popover(isPresented: $nulo){
+                    Text("No hay NIF seleccionado")
+                    .font(.title2)
+                    .frame(width: 150, height: 50)
             }
             
         }
