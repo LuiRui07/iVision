@@ -364,7 +364,7 @@ struct Revisiones: View{
             
         //Botones abajo
             HStack{
-            Button("Añadir"){
+            Button("Añadir"){     //NOSEPUEDAÑADIR VACIo
                 let eye = TEye (context: moc)
                 eye.nif = nifPersona
                 eye.id = UUID()

@@ -129,12 +129,10 @@ struct Principal: View  {
                 client.nombre = TNombre
                 client.apellidos = TApellidos
                 client.edad = Int16(TEdad) ?? 0
-            } else {
-                presented.toggle()
             }
             try? moc.save()
             }
-            .popover(isPresented: $presented){
+            .popover(isPresented: $esta){
                     Text("NIF ya introducido")
                     .font(.title2)
                     .frame(width: 150, height: 50)
