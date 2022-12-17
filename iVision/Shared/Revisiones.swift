@@ -22,6 +22,7 @@ func FechaaString (fecha : Date) -> String {
     return newString2
 }
 
+
 struct Revisiones: View{
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
@@ -44,9 +45,15 @@ struct Revisiones: View{
     @State public var tOi_adicion : String = ""
     @State public var tOi_agudeza : String = ""
     
-    @FetchRequest(sortDescriptors: []) var datos: FetchedResults<TEye>
+    func getDatos (nif : String) -> [TEye] {
+    let request = TEye.fetchRequest() as NSFetchRequest<TEye>
+    let pred = NSPredicate(format: "nif == %@", nif)
+    request.predicate = pred
+    let datos = (try? moc.fetch(request))!
+    return datos
+    }
 
-                                                    
+    
     var body: some View {
         //Titulo
         VStack{
@@ -58,9 +65,9 @@ struct Revisiones: View{
 
         //Tabla
         HStack{
-           Table(datos) {
+            let datos = getDatos(nif: nifPersona)
+            Table(datos) {
                TableColumn("ID"){ dato in
-                   if (dato.nif == nifPersona){
                        Text(dato.id?.uuidString ?? "1")
                            .onTapGesture(count: 1, perform: {
                                tOd_esfera = String(dato.od_esfera)
@@ -77,12 +84,10 @@ struct Revisiones: View{
                                idRevision = dato.id!
                            })
                    }
-               }
            }
            .frame(width: 350)
             Table(datos){
                 TableColumn("NIF"){ dato in
-                       if (dato.nif == nifPersona){
                            Text(dato.nif ?? "Unknown")
                                .onTapGesture(count: 1, perform: {
                                    tOd_esfera = String(dato.od_esfera)
@@ -98,11 +103,9 @@ struct Revisiones: View{
                                    tDate = dato.consulta!
                                    idRevision = dato.id!
                                })
-                       }
                 }
 
                TableColumn("CONSULTA"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(FechaaString(fecha:dato.consulta ?? Date.now))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -118,10 +121,8 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
                }
                 TableColumn("OD_ESFERA"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(String(dato.od_esfera))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -137,10 +138,9 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
+                      
                }
                TableColumn("OD_CILINDRO"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(String(dato.od_cilindro))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -156,10 +156,9 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
+                      
                }
                TableColumn("OD_ADICION"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(String(dato.od_adicion))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -175,10 +174,8 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
                }
                TableColumn("OD_AGUDEZA"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(String(dato.od_agudeza))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -194,10 +191,8 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
                }
                TableColumn("OI_ESFERA"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(String(dato.oi_esfera))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -213,10 +208,8 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
                }
                TableColumn("OI_CILINDRO"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(String(dato.oi_cilindro))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -232,10 +225,8 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
                }
                TableColumn("OI_ADICION"){ dato in
-                      if (dato.nif == nifPersona){
                           Text(String(dato.oi_adicion))
                               .onTapGesture(count: 1, perform: {
                                   tOd_esfera = String(dato.od_esfera)
@@ -251,11 +242,9 @@ struct Revisiones: View{
                                   tDate = dato.consulta!
                                   idRevision = dato.id!
                               })
-                      }
                }
 
                 TableColumn("OI_AGUDEZA"){ dato in
-                       if (dato.nif == nifPersona){
                            Text(String(dato.oi_agudeza))
                                .onTapGesture(count: 1, perform: {
                                    tOd_esfera = String(dato.od_esfera)
@@ -271,7 +260,6 @@ struct Revisiones: View{
                                    tDate = dato.consulta!
                                    idRevision = dato.id!
                                })
-                       }
                 }
                 
                 }
@@ -386,7 +374,7 @@ struct Revisiones: View{
             
             Button("Actualizar"){
                 
-                for d in datos{
+                for d in getDatos (nif: nifPersona){
                     print(idRevision)
                     if d.id == idRevision{
                         if (d.od_esfera != Double(tOd_esfera)){
@@ -430,6 +418,7 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Borrar", role: .destructive){
+                let datos = getDatos(nif: nifPersona)
                 for d in datos{
                     if d.id == idRevision{
                         let index = datos.firstIndex(of: d)
