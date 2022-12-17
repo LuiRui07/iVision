@@ -17,6 +17,7 @@ struct Principal: View  {
     @State public var TEdad: String = ""
     @State private var navigated = false
     @State private var esta = false
+    @State private var presented = false
     
     var body: some View {
         //Titulo
@@ -128,8 +129,15 @@ struct Principal: View  {
                 client.nombre = TNombre
                 client.apellidos = TApellidos
                 client.edad = Int16(TEdad) ?? 0
+            } else {
+                presented.toggle()
             }
             try? moc.save()
+            }
+            .popover(isPresented: $presented){
+                    Text("NIF ya introducido")
+                    .font(.title2)
+                    .frame(width: 150, height: 50)
             }
             .padding(10)
             .fixedSize()

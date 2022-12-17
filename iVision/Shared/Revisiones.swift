@@ -52,6 +52,31 @@ struct Revisiones: View{
     let datos = (try? moc.fetch(request))!
     return datos
     }
+    
+    func refresco(){  /// QUE COÑO ESTOY HACIENDO
+        tOd_esfera = tOd_esfera
+        tOd_cilindro  = tOd_cilindro
+        tOd_adicion  = tOd_adicion
+        tOd_agudeza  = tOd_agudeza
+        tOi_esfera  = tOi_esfera
+        tOi_cilindro  = tOi_cilindro
+        tOi_adicion  = tOi_adicion
+        tOi_agudeza  = tOi_agudeza
+        tDate = tDate
+        idRevision = idRevision
+    }
+    
+    func limpiar(){
+        tOd_esfera = ""
+        tOd_cilindro  = ""
+        tOd_adicion  = ""
+        tOd_agudeza  = ""
+        tOi_esfera  = ""
+        tOi_cilindro  = ""
+        tOi_adicion  = ""
+        tOi_agudeza  = ""
+        tDate = Date.now
+    }
 
     
     var body: some View {
@@ -353,29 +378,21 @@ struct Revisiones: View{
                 eye.oi_adicion = Double(tOi_adicion) ?? 0
                 eye.oi_agudeza = Double(tOi_agudeza) ?? 0
                 
-                try? moc.save()   //No estoy tan seguro deque se guarde
+                refresco()
+                limpiar()
+                try? moc.save()
             }
             .padding(.bottom,70)
             .fixedSize()
             
             Button("Limpiar"){
-                tOd_esfera = ""
-                tOd_cilindro  = ""
-                tOd_adicion  = ""
-                tOd_agudeza  = ""
-                tOi_esfera  = ""
-                tOi_cilindro  = ""
-                tOi_adicion  = ""
-                tOi_agudeza  = ""
-                tDate = Date.now
+            limpiar()
             }
             .padding(.top,70)
             .fixedSize()
             
             Button("Actualizar"){
-                
                 for d in getDatos (nif: nifPersona){
-                    print(idRevision)
                     if d.id == idRevision{
                         if (d.od_esfera != Double(tOd_esfera)){
                             d.od_esfera = Double(tOd_esfera) ?? 0
@@ -406,6 +423,7 @@ struct Revisiones: View{
                         }
                     }
             }
+                limpiar()
                 try? moc.save()
             }
             .padding(.bottom,70)
@@ -426,7 +444,8 @@ struct Revisiones: View{
                         moc.delete(eliminar)
                     }
             }
-                try? moc.save()
+            limpiar()
+            try? moc.save()
             }
             .padding(.bottom,70)
             .fixedSize()
