@@ -15,12 +15,14 @@ struct Principal: View  {
     @State public var TNombre: String = ""
     @State public var TApellidos: String = ""
     @State public var TEdad: String = ""
+    
     @State private var navigated = false
-    @State private var navegar = false
     @State private var esta = false
     @State private var nulo = false
+    @State private var camposvacios = false
     
     var body: some View {
+        
         //Titulo
         Text("Revisión Ocular")
             .padding()
@@ -29,44 +31,43 @@ struct Principal: View  {
         //Tabla
            Table(clients) {
                TableColumn("NIF"){ client in
-                   Text(client.nif ?? "Unknown")
+                   Text(client.nif!)
                        .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre ?? ""
-                           Tnif = client.nif ?? ""
-                           TApellidos = client.apellidos ?? ""
+                           TNombre = client.nombre!
+                           Tnif = client.nif!
+                           TApellidos = client.apellidos!
                            TEdad = String(client.edad)
                        })
                }
                TableColumn("Nombre"){ client in
-                   Text(client.nombre ?? "Unknown")
+                   Text(client.nombre!)
                        .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre ?? ""
-                           Tnif = client.nif ?? ""
-                           TApellidos = client.apellidos ?? ""
+                           TNombre = client.nombre!
+                           Tnif = client.nif!
+                           TApellidos = client.apellidos!
                            TEdad = String(client.edad)
                        })
                }
                TableColumn("Apellidos"){ client in
-                   Text(client.apellidos ?? "Unknown")
+                   Text(client.apellidos!)
                        .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre ?? ""
-                           Tnif = client.nif ?? ""
-                           TApellidos = client.apellidos ?? ""
+                           TNombre = client.nombre!
+                           Tnif = client.nif!
+                           TApellidos = client.apellidos!
                            TEdad = String(client.edad)
                        })
                }
                TableColumn("Edad"){ client in
                    Text(String(client.edad))
                        .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre ?? ""
-                           Tnif = client.nif ?? ""
-                           TApellidos = client.apellidos ?? ""
+                           TNombre = client.nombre!
+                           Tnif = client.nif!
+                           TApellidos = client.apellidos!
                            TEdad = String(client.edad)
                        })
                }
         }
        .shadow(color: .black, radius:100)
-       .listStyle(InsetListStyle())
         
         //Cuadros de Texto
         VStack{
@@ -100,17 +101,16 @@ struct Principal: View  {
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
             
-            Button(action: {
-                nulo = false;
-                self.navigated.toggle()
+            Button(action: {   //simplificas
+                nulo = false
                 if (Tnif == ""){
-                    nulo.toggle()
+                    nulo = true
                 }
-                navegar = navigated && !nulo
+                navigated = !nulo
             }, label: {
             Text("Revisiones")
             })
-            .sheet(isPresented: $navegar){
+            .sheet(isPresented: $navigated){
                 Revisiones(nifPersona: Tnif, nombrePersona: TNombre, apellidosPersona: TApellidos, edadPersona: TEdad)
             }
             .popover(isPresented: $nulo){
@@ -129,12 +129,17 @@ struct Principal: View  {
         HStack{
             Button("Añadir"){
             esta = false
+            camposvacios = false
             for c in clients{
                     if c.nif == Tnif{
                         esta = true
                     }
             }
-            if (esta == false){
+           
+            if (Tnif == "" || TNombre == "" || TApellidos == "" || TEdad == ""){
+                camposvacios = true
+            }
+            if (esta == false && camposvacios == false){
                 let client = TClient(context: moc)
                 client.nif = Tnif
                 client.nombre = TNombre
@@ -145,6 +150,11 @@ struct Principal: View  {
             }
             .popover(isPresented: $esta){
                     Text("NIF ya introducido")
+                    .font(.title2)
+                    .frame(width: 150, height: 50)
+            }
+            .popover(isPresented: $camposvacios){
+                    Text("Rellene todos los campos")
                     .font(.title2)
                     .frame(width: 150, height: 50)
             }

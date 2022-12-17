@@ -9,19 +9,6 @@ import Foundation
 import SwiftUI
 import CoreData
 
-func FechaaString (fecha : Date) -> String {
-    let s = fecha.ISO8601Format()
-    let index = s.firstIndex(of: "T") ?? s.endIndex
-    let beginning = s[..<index]
-    let newString = String(beginning)
-    
-    let ar = newString.split(separator: "-")
-    let newString2 = String(ar[2] + "/" + ar[1] + "/" + ar[0])
-
-    
-    return newString2
-}
-
 
 struct Revisiones: View{
     @Environment(\.managedObjectContext) var moc
@@ -51,6 +38,19 @@ struct Revisiones: View{
     request.predicate = pred
     let datos = (try? moc.fetch(request))!
     return datos
+    }
+    
+    func FechaaString (fecha : Date) -> String {
+        let s = fecha.ISO8601Format()
+        let index = s.firstIndex(of: "T") ?? s.endIndex
+        let beginning = s[..<index]
+        let newString = String(beginning)
+        
+        let ar = newString.split(separator: "-")
+        let newString2 = String(ar[2] + "/" + ar[1] + "/" + ar[0])
+
+        
+        return newString2
     }
     
     func refresco(){  /// QUE COÑO ESTOY HACIENDO
