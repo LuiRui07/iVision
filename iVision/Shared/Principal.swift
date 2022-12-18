@@ -20,6 +20,7 @@ struct Principal: View  {
     @State private var esta = false
     @State private var nulo = false
     @State private var camposvacios = false
+    @State private var camposvacios2 = false
     
     var body: some View {
         
@@ -162,20 +163,31 @@ struct Principal: View  {
             .fixedSize()
 
             Button("Actualizar"){
-                for c in clients{
-                    if c.nif == Tnif{
-                        if c.nombre != TNombre{
-                            c.nombre = TNombre
-                        }
-                        if c.apellidos != TApellidos{
-                            c.apellidos = TApellidos
-                        }
-                        if c.edad != Int16(TEdad){
-                            c.edad = Int16(TEdad)!
+                if (Tnif == "" || TNombre == "" || TApellidos == "" || TEdad == ""){
+                    camposvacios2 = true
+                }
+                if camposvacios2 == false{
+                    for c in clients{
+                        if c.nif == Tnif{
+                            if c.nombre != TNombre{
+                                c.nombre = TNombre
+                            }
+                            if c.apellidos != TApellidos{
+                                c.apellidos = TApellidos
+                            }
+                            if c.edad != Int16(TEdad){
+                                c.edad = Int16(TEdad)!
+                            }
                         }
                     }
-            }
+                    
+                }
                 try? moc.save()
+                }
+            .popover(isPresented: $camposvacios2){
+                    Text("Rellene todos los campos")
+                    .font(.title2)
+                    .frame(width: 150, height: 50)
             }
             .padding(10)
             .fixedSize()
