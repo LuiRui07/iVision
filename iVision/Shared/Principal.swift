@@ -8,66 +8,59 @@
 import SwiftUI
 import CoreData
 
+class UserOcular {
+    var Nif: String
+    var Nombre : String
+    var Apellidos : String
+    var Edad : String
+    
+    init(){
+    Nif = ""
+    Nombre = ""
+    Apellidos = ""
+    Edad = ""
+    }
+}
+
 struct Principal: View  {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
+    @State var us = UserOcular()
     @State public var Tnif: String = ""
     @State public var TNombre: String = ""
     @State public var TApellidos: String = ""
     @State public var TEdad: String = ""
-    
     @State private var navigated = false
-    @State private var esta = false
-    @State private var nulo = false
-    @State private var camposvacios = false
-    @State private var camposvacios2 = false
     
     var body: some View {
-        
         //Titulo
         Text("Revisión Ocular")
             .padding()
             .font(.title)
-
+        
         //Tabla
-           Table(clients) {
-               TableColumn("NIF"){ client in
-                   Text(client.nif!)
-                       .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre!
-                           Tnif = client.nif!
-                           TApellidos = client.apellidos!
-                           TEdad = String(client.edad)
-                       })
-               }
-               TableColumn("Nombre"){ client in
-                   Text(client.nombre!)
-                       .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre!
-                           Tnif = client.nif!
-                           TApellidos = client.apellidos!
-                           TEdad = String(client.edad)
-                       })
-               }
-               TableColumn("Apellidos"){ client in
-                   Text(client.apellidos!)
-                       .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre!
-                           Tnif = client.nif!
-                           TApellidos = client.apellidos!
-                           TEdad = String(client.edad)
-                       })
-               }
-               TableColumn("Edad"){ client in
-                   Text(String(client.edad))
-                       .onTapGesture(count: 1, perform: {
-                           TNombre = client.nombre!
-                           Tnif = client.nif!
-                           TApellidos = client.apellidos!
-                           TEdad = String(client.edad)
-                       })
-               }
+        HStack{
+          Text("NIF")
+          Text("Nombre")
+          Text("Apellidos")
+          Text("Edad")
         }
+        .padding(.trailing, 750)
+        
+       VStack {
+           List(clients) { client in
+                HStack{
+                Text(client.nif ?? "Unknown")
+                       .padding()
+                Text(client.nombre ?? "Unknown")
+                       .padding()
+                Text(client.apellidos ?? "Unknown")
+                       .padding()
+                Text(String(client.edad))
+                       .padding()
+               }
+            }
+    }
        .shadow(color: .black, radius:100)
         
         //Cuadros de Texto
@@ -102,23 +95,15 @@ struct Principal: View  {
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
             
-            Button(action: {   //simplificas
-                nulo = false
-                if (Tnif == ""){
-                    nulo = true
-                }
-                navigated = !nulo
+            Button(action: {
+                self.navigated.toggle()
             }, label: {
             Text("Revisiones")
             })
             .sheet(isPresented: $navigated){
-                Revisiones(nifPersona: Tnif, nombrePersona: TNombre, apellidosPersona: TApellidos, edadPersona: TEdad)
+                Revisiones()
             }
-            .popover(isPresented: $nulo){
-                    Text("No hay NIF seleccionado")
-                    .font(.title2)
-                    .frame(width: 150, height: 50)
-            }
+            //Conecta con revisiones
             
         }
         }
@@ -129,65 +114,41 @@ struct Principal: View  {
         //Botones abajo
         HStack{
             Button("Añadir"){
-            esta = false
-            camposvacios = false
-            for c in clients{
-                    if c.nif == Tnif{
-                        esta = true
-                    }
-            }
-           
-            if (Tnif == "" || TNombre == "" || TApellidos == "" || TEdad == ""){
-                camposvacios = true
-            }
-            if (esta == false && camposvacios == false){
                 let client = TClient(context: moc)
                 client.nif = Tnif
+                if (Comprobar_nif(nif: Tnif) == false){
+                    //Excepción o yo que se
+                }
                 client.nombre = TNombre
                 client.apellidos = TApellidos
                 client.edad = Int16(TEdad) ?? 0
-            }
-            try? moc.save()
-            }
-            .popover(isPresented: $esta){
-                    Text("NIF ya introducido")
-                    .font(.title2)
-                    .frame(width: 150, height: 50)
-            }
-            .popover(isPresented: $camposvacios){
-                    Text("Rellene todos los campos")
-                    .font(.title2)
-                    .frame(width: 150, height: 50)
+                    
+                try? moc.save()
             }
             .padding(10)
             .fixedSize()
+            
+            
 
-            Button("Actualizar"){
-                if (Tnif == "" || TNombre == "" || TApellidos == "" || TEdad == ""){
-                    camposvacios2 = true
-                }
-                if camposvacios2 == false{
-                    for c in clients{
-                        if c.nif == Tnif{
-                            if c.nombre != TNombre{
-                                c.nombre = TNombre
-                            }
-                            if c.apellidos != TApellidos{
-                                c.apellidos = TApellidos
-                            }
-                            if c.edad != Int16(TEdad){
+            Button("Actualizar") {
+                for c in clients{
+                    if c.nif == Tnif{
+                        if c.nombre != TNombre{
+                            c.nombre = TNombre
+                        }
+                        if c.apellidos != TApellidos{
+                            c.apellidos = TApellidos
+                        }
+                        if c.edad != Int16(TEdad){
+                            if (Int16(TEdad) == nil){
+                                c.edad = 0
+                            } else{
                                 c.edad = Int16(TEdad)!
                             }
                         }
                     }
-                    
-                }
+            }
                 try? moc.save()
-                }
-            .popover(isPresented: $camposvacios2){
-                    Text("Rellene todos los campos")
-                    .font(.title2)
-                    .frame(width: 150, height: 50)
             }
             .padding(10)
             .fixedSize()
@@ -240,5 +201,21 @@ struct ContentView_Previews: PreviewProvider {
                 .environment(\.sizeCategory, .large)
         }
         }
+    }
+    
+    private func Comprobar_nif(nif : String) -> (Bool){
+        var res : Bool = true;
+        
+        @Environment(\.managedObjectContext) var moc
+        @FetchRequest(sortDescriptors: []) var clients: FetchedResults<TClient>
+        
+        for cliente in clients{
+            if (cliente.nif == nif){
+                res = false;
+            }
+        }
+        
+        
+        return res;
     }
 }
