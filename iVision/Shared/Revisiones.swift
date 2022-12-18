@@ -57,19 +57,6 @@ struct Revisiones: View{
         return newString2
     }
     
-    func refresco(){  /// QUE COÑO ESTOY HACIENDO
-        tOd_esfera = tOd_esfera
-        tOd_cilindro  = tOd_cilindro
-        tOd_adicion  = tOd_adicion
-        tOd_agudeza  = tOd_agudeza
-        tOi_esfera  = tOi_esfera
-        tOi_cilindro  = tOi_cilindro
-        tOi_adicion  = tOi_adicion
-        tOi_agudeza  = tOi_agudeza
-        tDate = tDate
-        idRevision = idRevision
-    }
-    
     func limpiar(){
         tOd_esfera = ""
         tOd_cilindro  = ""
@@ -84,6 +71,7 @@ struct Revisiones: View{
 
     
     var body: some View {
+        
         //Titulo
         VStack{
             let Todo =  nifPersona + ";" + nombrePersona + ";" + apellidosPersona + ";" + edadPersona
@@ -368,7 +356,7 @@ struct Revisiones: View{
             
         //Botones abajo
             HStack{
-            Button("Añadir"){     //NOSEPUEDAÑADIR VACIo
+            Button("Añadir"){
                 camposvacios = false
                 if (tOd_esfera == "" || tOd_cilindro == "" || tOd_adicion == "" || tOd_agudeza == "" || tOi_esfera == "" || tOi_cilindro == ""
                 || tOi_adicion == "" || tOi_agudeza == ""){
@@ -388,7 +376,7 @@ struct Revisiones: View{
                 eye.oi_adicion = Double(tOi_adicion) ?? 0
                 eye.oi_agudeza = Double(tOi_agudeza) ?? 0
                 
-                refresco()
+                    
                 limpiar()
                 }
                 try? moc.save()
@@ -417,28 +405,28 @@ struct Revisiones: View{
                 for d in getDatos (nif: nifPersona){
                     if d.id == idRevision{
                         if (d.od_esfera != Double(tOd_esfera)){
-                            d.od_esfera = Double(tOd_esfera) ?? 0
+                            d.od_esfera = Double(tOd_esfera)!
                         }
                         if (d.od_cilindro != Double(tOd_cilindro)){
-                            d.od_cilindro = Double(tOd_cilindro) ?? 0
+                            d.od_cilindro = Double(tOd_cilindro)!
                         }
                         if (d.od_agudeza != Double(tOd_agudeza)){
-                            d.od_agudeza = Double(tOd_agudeza) ?? 0
+                            d.od_agudeza = Double(tOd_agudeza)!
                         }
                         if (d.od_adicion != Double(tOd_adicion)){
-                            d.od_adicion = Double(tOd_adicion) ?? 0
+                            d.od_adicion = Double(tOd_adicion)!
                         }
                         if (d.oi_esfera != Double(tOi_esfera)){
-                            d.oi_esfera = Double(tOi_esfera) ?? 0
+                            d.oi_esfera = Double(tOi_esfera)!
                         }
                         if (d.oi_cilindro != Double(tOi_cilindro)){
-                            d.oi_cilindro = Double(tOi_cilindro) ?? 0
+                            d.oi_cilindro = Double(tOi_cilindro)!
                         }
                         if (d.oi_agudeza != Double(tOi_agudeza)){
-                            d.oi_agudeza = Double(tOi_agudeza) ?? 0
+                            d.oi_agudeza = Double(tOi_agudeza)!
                         }
                         if (d.oi_adicion != Double(tOi_adicion)){
-                            d.oi_adicion = Double(tOi_adicion) ?? 0
+                            d.oi_adicion = Double(tOi_adicion)!
                         }
                         if (d.consulta != tDate){
                             d.consulta = tDate
@@ -470,9 +458,9 @@ struct Revisiones: View{
                         let index = datos.firstIndex(of: d)
                         let eliminar = datos[index!]
                         moc.delete(eliminar)
+                        limpiar()
                     }
             }
-            limpiar()
             try? moc.save()
             }
             .padding(.bottom,70)

@@ -22,6 +22,13 @@ struct Principal: View  {
     @State private var camposvacios = false
     @State private var camposvacios2 = false
     
+    func limpiar(){
+        TNombre = ""
+        Tnif = ""
+        TApellidos = ""
+        TEdad = ""
+    }
+    
     var body: some View {
         
         //Titulo
@@ -146,7 +153,9 @@ struct Principal: View  {
                 client.nombre = TNombre
                 client.apellidos = TApellidos
                 client.edad = Int16(TEdad)!
+                limpiar()
             }
+            
             try? moc.save()
             }
             .popover(isPresented: $esta){
@@ -163,12 +172,13 @@ struct Principal: View  {
             .fixedSize()
 
             Button("Actualizar"){
+                camposvacios2 = false
                 if (Tnif == "" || TNombre == "" || TApellidos == "" || TEdad == ""){
                     camposvacios2 = true
                 }
-                if camposvacios2 == false{
+                if (camposvacios2 == false){
                     for c in clients{
-                        if c.nif == Tnif{
+                        if (c.nif == Tnif){
                             if c.nombre != TNombre{
                                 c.nombre = TNombre
                             }
@@ -180,10 +190,10 @@ struct Principal: View  {
                             }
                         }
                     }
-                    
+                limpiar()
                 }
                 try? moc.save()
-                }
+            }
             .popover(isPresented: $camposvacios2){
                     Text("Rellene todos los campos")
                     .font(.title2)
@@ -198,18 +208,17 @@ struct Principal: View  {
                         let index = clients.firstIndex(of: c)
                         let eliminar = clients[index!]
                         moc.delete(eliminar)
+                        limpiar()
                     }
             }
+                
                 try? moc.save()
             }
             .padding(10)
             .fixedSize()
             
             Button("Limpiar"){
-                TNombre = ""
-                Tnif = ""
-                TApellidos = ""
-                TEdad = ""
+            limpiar()
             }
             .padding(10)
             .fixedSize()
