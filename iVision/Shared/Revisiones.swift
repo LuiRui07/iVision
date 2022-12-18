@@ -32,6 +32,10 @@ struct Revisiones: View{
     @State public var tOi_adicion : String = ""
     @State public var tOi_agudeza : String = ""
     
+    @State private var camposvacios = false
+    @State private var camposvacios2 = false
+    
+    
     func getDatos (nif : String) -> [TEye] {
     let request = TEye.fetchRequest() as NSFetchRequest<TEye>
     let pred = NSPredicate(format: "nif == %@", nif)
@@ -93,7 +97,7 @@ struct Revisiones: View{
             let datos = getDatos(nif: nifPersona)
             Table(datos) {
                TableColumn("ID"){ dato in
-                       Text(dato.id?.uuidString ?? "1")
+                   Text((dato.id?.uuidString)!)
                            .onTapGesture(count: 1, perform: {
                                tOd_esfera = String(dato.od_esfera)
                                tOd_cilindro = String(dato.od_cilindro)
@@ -365,6 +369,12 @@ struct Revisiones: View{
         //Botones abajo
             HStack{
             Button("Añadir"){     //NOSEPUEDAÑADIR VACIo
+                camposvacios = false
+                if (tOd_esfera == "" || tOd_cilindro == "" || tOd_adicion == "" || tOd_agudeza == "" || tOi_esfera == "" || tOi_cilindro == ""
+                || tOi_adicion == "" || tOi_agudeza == ""){
+                    camposvacios = true
+                }
+                else {
                 let eye = TEye (context: moc)
                 eye.nif = nifPersona
                 eye.id = UUID()
@@ -380,7 +390,13 @@ struct Revisiones: View{
                 
                 refresco()
                 limpiar()
+                }
                 try? moc.save()
+            }
+            .popover(isPresented: $camposvacios){
+                    Text("Rellene todos los campos")
+                    .font(.title2)
+                    .frame(width: 150, height: 50)
             }
             .padding(.bottom,70)
             .fixedSize()
@@ -392,6 +408,12 @@ struct Revisiones: View{
             .fixedSize()
             
             Button("Actualizar"){
+            camposvacios2 = false
+            if (tOd_esfera == "" || tOd_cilindro == "" || tOd_adicion == "" || tOd_agudeza == "" || tOi_esfera == "" || tOi_cilindro == ""
+            || tOi_adicion == "" || tOi_agudeza == ""){
+                camposvacios2 = true
+            }
+            else {
                 for d in getDatos (nif: nifPersona){
                     if d.id == idRevision{
                         if (d.od_esfera != Double(tOd_esfera)){
@@ -424,7 +446,13 @@ struct Revisiones: View{
                     }
             }
                 limpiar()
+            }
                 try? moc.save()
+            }
+            .popover(isPresented: $camposvacios2){
+                    Text("Rellene todos los campos")
+                    .font(.title2)
+                    .frame(width: 150, height: 50)
             }
             .padding(.bottom,70)
             .fixedSize()

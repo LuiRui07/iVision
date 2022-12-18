@@ -102,7 +102,7 @@ struct Principal: View  {
                 .frame(width: 400)
                 .textFieldStyle(.roundedBorder)
             
-            Button(action: {   //simplificas
+            Button(action: { 
                 nulo = false
                 if (Tnif == ""){
                     nulo = true
@@ -145,7 +145,7 @@ struct Principal: View  {
                 client.nif = Tnif
                 client.nombre = TNombre
                 client.apellidos = TApellidos
-                client.edad = Int16(TEdad) ?? 0
+                client.edad = Int16(TEdad)!
             }
             try? moc.save()
             }
